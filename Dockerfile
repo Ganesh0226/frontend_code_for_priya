@@ -1,10 +1,3 @@
-FROM node:17 AS build
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
+FROM openjdk:17-jre-slim
 COPY . .
-RUN npm run build
-FROM nginx:alpine
-COPY --from=build /app/build /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["java","-jar","java-17-maven-project-1.0.0.jar"]
